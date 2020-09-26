@@ -3,5 +3,7 @@
     "public": "/",
     "src": "/_dist_"
   },
-  "plugins": []
+  "plugins": [
+    ["@snowpack/plugin-optimize"]
+  ]
 }
