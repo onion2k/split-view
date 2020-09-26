@@ -7,10 +7,10 @@ Give the two elements to be compared attributes of `slot="top"` and `slot="botto
 ```
 <split-view>
   <picture slot="top">
-    <img src="https://source.unsplash.com/600x400/?day" />
+    <img src="https://source.unsplash.com/600x400/?day" alt="Day" />
   </picture>
   <picture slot="bottom">
-    <img src="https://source.unsplash.com/600x400/?night" />
+    <img src="https://source.unsplash.com/600x400/?night" alt="Night" />
   </picture>
 </split-view>
 ```
@@ -20,10 +20,10 @@ Split View also supports an optional `mode`. This option determines how the top 
 ```
 <split-view mode="screen">
   <picture slot="top">
-    <img src="https://source.unsplash.com/600x400/?day" />
+    <img src="https://source.unsplash.com/600x400/?day" alt="Day" />
   </picture>
   <picture slot="bottom">
-    <img src="https://source.unsplash.com/600x400/?night" />
+    <img src="https://source.unsplash.com/600x400/?night" alt="Night" />
   </picture>
 </split-view>
 ```
