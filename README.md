@@ -1,24 +1,31 @@
-# New Project
+# Split View
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+Split View is a web component for comparing two images. To use it include `/dist/split-view.js` in a page and then use `<split-view>[...]</split-view>` to use the component. It's best used with `<picture>` elements.
 
-## Available Scripts
+Give the two elements to be compared attributes of `slot="top"` and `slot="bottom"`.
 
-### npm start
+```
+<split-view>
+  <picture slot="top">
+    <img src="https://source.unsplash.com/600x400/?day" />
+  </picture>
+  <picture slot="bottom">
+    <img src="https://source.unsplash.com/600x400/?night" />
+  </picture>
+</split-view>
+```
 
-Runs the app in the development mode.
-Open http://localhost:8080 to view it in the browser.
+Split View also supports an optional `mode`. This option determines how the top and bottom layers are blended.
 
-The page will reload if you make edits.
-You will also see any lint errors in the console.
+```
+<split-view mode="screen">
+  <picture slot="top">
+    <img src="https://source.unsplash.com/600x400/?day" />
+  </picture>
+  <picture slot="bottom">
+    <img src="https://source.unsplash.com/600x400/?night" />
+  </picture>
+</split-view>
+```
 
-### npm run build
-
-Builds a static copy of your site to the `build/` folder.
-Your app is ready to be deployed!
-
-**For the best production performance:** Add a build bundler plugin like "@snowpack/plugin-webpack" or "@snowpack/plugin-parcel" to your `snowpack.config.json` config file.
-
-### Q: What about Eject?
-
-No eject needed! Snowpack guarantees zero lock-in, and CSA strives for the same.
+Options are the same as CSS's `mix-blend-mode`.
