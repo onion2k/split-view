@@ -39,12 +39,12 @@ let tmpl=document.createElement("template");tmpl.innerHTML=`
       -webkit-appearance: none;
     }
     input[type="range"]:focus {
-      outline: none;
-    }    
+      outline: var(--outline, -webkit-focus-ring-color auto 1px);
+    }
   </style>
   <div class="split" id="split">
     <div class="bottom" id="bottom"><slot name="bottom"></slot></div>
     <div class="top" id="top"><slot name="top"></slot></div>
     <input type="range" min=0 max=100 value=0 id="slider" />
   </div>
-`;class SplitView extends HTMLElement{constructor(){super();let t=this.attachShadow({mode:"open"});t.appendChild(tmpl.content.cloneNode(!0))}connectedCallback(){const t=this.shadowRoot.getElementById("slider"),e=this.shadowRoot.getElementById("split"),s=this.shadowRoot.getElementById("top"),o=this.getAttribute("start")||50,n=this.getAttribute("mode")||"normal";t.addEventListener("input",l=>{const i=+l.target.value;console.log(i),e.style.setProperty("--split",i)}),e.style.setProperty("--split",o),t.value=o,s.style.mixBlendMode=n}}window.customElements.define("split-view",SplitView);
+`;class SplitView extends HTMLElement{constructor(){super();let t=this.attachShadow({mode:"open"});t.appendChild(tmpl.content.cloneNode(!0))}connectedCallback(){const t=this.shadowRoot.getElementById("slider"),e=this.shadowRoot.getElementById("split"),s=this.shadowRoot.getElementById("top"),o=this.getAttribute("start")||50,l=this.getAttribute("mode")||"normal";t.addEventListener("input",n=>{const i=+n.target.value;console.log(i),e.style.setProperty("--split",i)}),e.style.setProperty("--split",o),t.value=o,s.style.mixBlendMode=l}}window.customElements.define("split-view",SplitView);
