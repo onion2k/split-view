@@ -40,8 +40,8 @@ tmpl.innerHTML = `
       -webkit-appearance: none;
     }
     input[type="range"]:focus {
-      outline: none;
-    }    
+      outline: var(--outline, -webkit-focus-ring-color auto 1px);
+    }
   </style>
   <div class="split" id="split">
     <div class="bottom" id="bottom"><slot name="bottom"></slot></div>
