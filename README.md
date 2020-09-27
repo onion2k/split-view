@@ -4,6 +4,10 @@ Split View is a web component for comparing two images. To use it include `/dist
 
 ![Split view](./assets/split-view.png)
 
+## Goals
+
+The aim of `<split-view>` is provide an accessible image comparison component. Under the hood `<split-view>` uses an  HTML range input to control the position of the slider rather than a JavaScript powered `div` element which is more commonly used for this sort of input element. Using an HTML input means all of the accessibility features of the browser are still usable.
+
 ## Usage
 
 Give the two elements to be compared attributes of `slot="top"` and `slot="bottom"`.
@@ -36,14 +40,12 @@ Options are the same as CSS's `mix-blend-mode`.
 
 ## Accessibility
 
-The aim of `<split-view>` is provide an accessible image comparison component.
-
 ### Accessibility labels
 
 `<split-view>` accepts two labels that are used for accessibilty;
 
-`split-view-label` - An aria-label value for the component
-`slider-label` - A label used to describe the slider
+- `split-view-label` - An aria-label value for the component
+- `slider-label` - A label used to describe the slider
 
 ### Focus outline
 
