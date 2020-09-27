@@ -32,7 +32,7 @@ Options are the same as CSS's `mix-blend-mode`.
 
 ## Accessibility and Focus outline
 
-By default split-view will have a focus outline when if the user has focused on it. This is desirable and good practice for making accessible websites, but if you really have to switch it off you can by defining a style in your page of;
+By default split-view will have a focus outline if the user has focused on it. This is desirable and good practice for making accessible websites, but if you really have to switch it off you can by defining a style in your page of;
 
 ```css
 split-view {
