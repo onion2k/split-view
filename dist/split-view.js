@@ -24,7 +24,7 @@ let tmpl=document.createElement("template");tmpl.innerHTML=`
     }
     .top {
       z-index: 2;
-      right: calc(8px + (((100% - 16px) / 100) * var(--split)));
+      right: calc(8px + (((100% - 16px) / 100) * (100 - var(--split))));
       overflow: hidden;
       border-right: 1px solid white;
     }
@@ -47,4 +47,4 @@ let tmpl=document.createElement("template");tmpl.innerHTML=`
     <div class="top" id="top"><slot name="top"></slot></div>
     <input type="range" min=0 max=100 value=0 id="slider" />
   </div>
-`;class SplitView extends HTMLElement{constructor(){super();let t=this.attachShadow({mode:"open"});t.appendChild(tmpl.content.cloneNode(!0))}connectedCallback(){const t=this.shadowRoot.getElementById("slider"),o=this.shadowRoot.getElementById("split");t.addEventListener("input",s=>{const e=+s.target.value;console.log(e),o.style.setProperty("--split",100-e)});const i=this.shadowRoot.getElementById("top");i.style.mixBlendMode=this.getAttribute("mode")||"normal"}}window.customElements.define("split-view",SplitView);
+`;class SplitView extends HTMLElement{constructor(){super();let t=this.attachShadow({mode:"open"});t.appendChild(tmpl.content.cloneNode(!0))}connectedCallback(){const t=this.shadowRoot.getElementById("slider"),e=this.shadowRoot.getElementById("split"),s=this.shadowRoot.getElementById("top"),o=this.getAttribute("start")||50,n=this.getAttribute("mode")||"normal";t.addEventListener("input",l=>{const i=+l.target.value;console.log(i),e.style.setProperty("--split",i)}),e.style.setProperty("--split",o),t.value=o,s.style.mixBlendMode=n}}window.customElements.define("split-view",SplitView);

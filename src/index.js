@@ -25,7 +25,7 @@ tmpl.innerHTML = `
     }
     .top {
       z-index: 2;
-      right: calc(8px + (((100% - 16px) / 100) * var(--split)));
+      right: calc(8px + (((100% - 16px) / 100) * (100 - var(--split))));
       overflow: hidden;
       border-right: 1px solid white;
     }
@@ -50,22 +50,46 @@ tmpl.innerHTML = `
   </div>
 `;
 class SplitView extends HTMLElement {
+
+  /**
+   * Split View is an image comparison component
+   * 
+   * <split-view>
+   *   <picture slot="top">[...]</picture>
+   *   <picture slot="bottom">[...]</picture>
+   * </split-view>
+   * 
+   * Options are;
+   * 
+   * start (number) The point where the comparison line should start (0 = left, 1000 = right)
+   * mode (string) A CSS mix-blend-mode to use for comparison
+   */
+
   constructor() {
     super();
     let shadowRoot = this.attachShadow({mode: 'open'});
     shadowRoot.appendChild(tmpl.content.cloneNode(true));
   }
+
   connectedCallback() {
     const slider = this.shadowRoot.getElementById("slider");
     const splitter = this.shadowRoot.getElementById("split");
+    const top = this.shadowRoot.getElementById("top");
+
+    const start = this.getAttribute("start") || 50;
+    const mode = this.getAttribute("mode") || "normal";
+
     slider.addEventListener("input", (event) => {
       const split = +event.target.value;
       console.log(split)
-      splitter.style.setProperty("--split", 100 - split);
+      splitter.style.setProperty("--split", split);
     });
 
-    const top = this.shadowRoot.getElementById("top");
-    top.style.mixBlendMode = this.getAttribute("mode") || "normal";
+    splitter.style.setProperty("--split", start);
+    slider.value = start;
+
+    top.style.mixBlendMode = mode;
   }
+
 }
 window.customElements.define('split-view', SplitView);
