@@ -2,6 +2,10 @@
 
 Split View is a web component for comparing two images. To use it include `/dist/split-view.js` in a page and then use `<split-view>[...]</split-view>` to use the component. It's best used with `<picture>` elements.
 
+![Split view](./assets/split-view.png)
+
+## Usage
+
 Give the two elements to be compared attributes of `slot="top"` and `slot="bottom"`.
 
 ```
@@ -30,7 +34,18 @@ Split View also supports an optional `mode` and `start` parameters. `mode` deter
 
 Options are the same as CSS's `mix-blend-mode`.
 
-## Accessibility and Focus outline
+## Accessibility
+
+The aim of `<split-view>` is provide an accessible image comparison component.
+
+### Accessibility labels
+
+`<split-view>` accepts two labels that are used for accessibilty;
+
+`split-view-label` - An aria-label value for the component
+`slider-label` - A label used to describe the slider
+
+### Focus outline
 
 By default split-view will have a focus outline if the user has focused on it. This is desirable and good practice for making accessible websites, but if you really have to switch it off you can by defining a style in your page of;
 
