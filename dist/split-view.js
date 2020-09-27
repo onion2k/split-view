@@ -42,9 +42,33 @@ let tmpl=document.createElement("template");tmpl.innerHTML=`
       outline: var(--outline, -webkit-focus-ring-color auto 1px);
     }
   </style>
-  <div class="split" id="split">
-    <div class="bottom" id="bottom"><slot name="bottom"></slot></div>
-    <div class="top" id="top"><slot name="top"></slot></div>
-    <input type="range" min=0 max=100 value=0 id="slider" />
-  </div>
-`;class SplitView extends HTMLElement{constructor(){super();let t=this.attachShadow({mode:"open"});t.appendChild(tmpl.content.cloneNode(!0))}connectedCallback(){const t=this.shadowRoot.getElementById("slider"),e=this.shadowRoot.getElementById("split"),s=this.shadowRoot.getElementById("top"),o=this.getAttribute("start")||50,l=this.getAttribute("mode")||"normal";t.addEventListener("input",n=>{const i=+n.target.value;console.log(i),e.style.setProperty("--split",i)}),e.style.setProperty("--split",o),t.value=o,s.style.mixBlendMode=l}}window.customElements.define("split-view",SplitView);
+  <div class="split" id="split" role="img" aria-label="Comparison of two images">
+    <div
+      class="bottom"
+      id="bottom"
+      aria-label="First image to compare"
+    >
+      <slot name="bottom"></slot>
+    </div>
+    <div
+      class="top"
+      id="top"
+      aria-label="Second image to compare"
+    >
+      <slot name="top"></slot>  
+    </div>
+    <label id="label" for="slider">Slide left and right to compare images</label>
+    <input
+      type="range"
+      role="slider"
+      min=0
+      max=100
+      value=0
+      name="slider"
+      id="slider"
+      aria-labelledby="label"
+      aria-valuemin=0
+      aria-valuemax=100
+    />
+    </div>
+`;class SplitView extends HTMLElement{constructor(){super();let t=this.attachShadow({mode:"open"});t.appendChild(tmpl.content.cloneNode(!0))}connectedCallback(){const t=this.shadowRoot.getElementById("split"),e=this.shadowRoot.getElementById("slider"),l=this.shadowRoot.getElementById("label"),s=this.shadowRoot.getElementById("top"),i=this.getAttribute("start")||50,a=this.getAttribute("split-view-label")||"Comparison of two images",r=this.getAttribute("slider-label")||"Press left and right to compare images",n=this.getAttribute("mode")||"normal";e.addEventListener("input",d=>{const o=+d.target.value;t.style.setProperty("--split",o),e.setAttribute("aria-valuenow",o)}),t.style.setProperty("--split",i),e.setAttribute("aria-valuenow",i),e.value=i,t.setAttribute("aria-label",a),l.innerText=r,s.style.mixBlendMode=n}}window.customElements.define("split-view",SplitView);
