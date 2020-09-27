@@ -43,11 +43,35 @@ tmpl.innerHTML = `
       outline: var(--outline, -webkit-focus-ring-color auto 1px);
     }
   </style>
-  <div class="split" id="split">
-    <div class="bottom" id="bottom"><slot name="bottom"></slot></div>
-    <div class="top" id="top"><slot name="top"></slot></div>
-    <input type="range" min=0 max=100 value=0 id="slider" />
-  </div>
+  <div class="split" id="split" role="img" aria-label="Comparison of two images">
+    <div
+      class="bottom"
+      id="bottom"
+      aria-label="First image to compare"
+    >
+      <slot name="bottom"></slot>
+    </div>
+    <div
+      class="top"
+      id="top"
+      aria-label="Second image to compare"
+    >
+      <slot name="top"></slot>  
+    </div>
+    <label id="label" for="slider">Slide left and right to compare images</label>
+    <input
+      type="range"
+      role="slider"
+      min=0
+      max=100
+      value=0
+      name="slider"
+      id="slider"
+      aria-labelledby="label"
+      aria-valuemin=0
+      aria-valuemax=100
+    />
+    </div>
 `;
 class SplitView extends HTMLElement {
 
@@ -72,21 +96,29 @@ class SplitView extends HTMLElement {
   }
 
   connectedCallback() {
-    const slider = this.shadowRoot.getElementById("slider");
     const splitter = this.shadowRoot.getElementById("split");
+    const slider = this.shadowRoot.getElementById("slider");
+    const label = this.shadowRoot.getElementById("label");
     const top = this.shadowRoot.getElementById("top");
 
     const start = this.getAttribute("start") || 50;
+    const splitViewLabelText = this.getAttribute("split-view-label") || 'Comparison of two images';
+    const sliderLabelText = this.getAttribute("slider-label") || 'Press left and right to compare images';
     const mode = this.getAttribute("mode") || "normal";
 
     slider.addEventListener("input", (event) => {
       const split = +event.target.value;
-      console.log(split)
       splitter.style.setProperty("--split", split);
+      slider.setAttribute('aria-valuenow', split);
     });
 
     splitter.style.setProperty("--split", start);
+    slider.setAttribute('aria-valuenow', start);
     slider.value = start;
+
+    splitter.setAttribute('aria-label', splitViewLabelText)
+
+    label.innerText = sliderLabelText;
 
     top.style.mixBlendMode = mode;
   }
